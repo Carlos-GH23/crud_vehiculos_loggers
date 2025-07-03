@@ -1,7 +1,10 @@
 package com.example.crud_vehiculos_loggers.vehicle.control;
 import com.example.crud_vehiculos_loggers.vehicle.model.Vehicle;
 import com.example.crud_vehiculos_loggers.vehicle.model.VehicleRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,6 +16,8 @@ import java.util.Optional;
 @Service
 public class VehicleService {
     private final VehicleRepository vehicleRepository;
+    private static final Logger logger = LoggerFactory.getLogger(VehicleService.class);
+
 
     @Autowired
     public VehicleService(VehicleRepository vehicleRepository) {
@@ -55,4 +60,9 @@ public class VehicleService {
         }
         return false;
     }
+    @Scheduled(cron = "0 * * * * ?")
+    public void imprimirHola(){
+        logger.info("hola");
+    }
+
 }
